@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">bizkaimoves-android</string>
     <string name="title_activity_home">HomeActivity</string>
+
+    <string name="around_me_menu">Around</string>
+    <string name="lines_menu">Lines</string>
+    <string name="favorites_menu">Favorites</string>
 </resources>

@@ -14,3 +14,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "bizkaimoves-android"
 include ':app'
+include ':around-me'
+include ':lines'
+include ':favorites'
