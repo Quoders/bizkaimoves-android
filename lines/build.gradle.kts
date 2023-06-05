@@ -46,9 +46,14 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.ui.util)
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.koin.compose)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.kotlin.serialization)
+    implementation(libs.retrofit.gson)
+    implementation(libs.okhttp.logging)
 
     testImplementation(libs.junit4)
 

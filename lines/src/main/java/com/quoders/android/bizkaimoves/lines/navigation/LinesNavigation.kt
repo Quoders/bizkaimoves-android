@@ -6,6 +6,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.quoders.android.bizkaimoves.lines.ui.LinesRoute
 
 const val LINES_RESOURCE_ID = "linesResourceId"
 const val linesNavigationRoute = "lines_route/{$LINES_RESOURCE_ID}"
