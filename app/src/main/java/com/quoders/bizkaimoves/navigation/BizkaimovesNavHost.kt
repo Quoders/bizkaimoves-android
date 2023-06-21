@@ -6,7 +6,9 @@ import androidx.navigation.compose.NavHost
 import com.quoders.android.bizkaimoves.aroundme.navigation.aroundMeNavigationRoute
 import com.quoders.android.bizkaimoves.aroundme.navigation.aroundMeScreen
 import com.quoders.android.bizkaimoves.favorites.navigation.favoritesScreen
-import com.quoders.android.bizkaimoves.lines.navigation.linesScreen
+import com.quoders.android.bizkaimoves.lines.navigation.linesGraph
+import com.quoders.android.bizkaimoves.lines.navigation.navigateToRoute
+import com.quoders.android.bizkaimoves.lines.navigation.routeScreen
 import com.quoders.bizkaimoves.ui.BizkaimovesAppState
 
 @Composable
@@ -22,7 +24,17 @@ fun BizkaimovesNavHost(
         modifier = modifier,
     ) {
         aroundMeScreen()
-        linesScreen()
+        linesGraph(
+            onLineClick = { lineId ->
+                navController.navigateToRoute(lineId)
+            },
+            nestedGraphs = {
+                routeScreen(
+                    onBackClick = navController::popBackStack,
+                    onLineClick = {}
+                )
+            }
+        )
         favoritesScreen()
     }
 }
