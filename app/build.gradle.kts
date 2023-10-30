@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.quoders.bizkaimoves"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.quoders.bizkaimoves"
@@ -68,7 +68,9 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.navigation.compose)
+
     implementation(libs.koin.compose)
+    implementation(libs.mavericks)
 
     debugApi(libs.androidx.compose.ui.tooling)
 

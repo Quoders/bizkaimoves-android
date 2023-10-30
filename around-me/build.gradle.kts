@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.quoders.android.bizkaimoves.aroundme"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
