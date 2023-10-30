@@ -4,12 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quoders.android.bizkaimoves.lines.LinesRepositoryImpl
 import com.quoders.android.bizkaimoves.lines.Route
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.util.Locale
 
-class LinesViewModel constructor(
+class LinesViewModel(
     private val linesRepository: LinesRepositoryImpl
 ) : ViewModel() {
 
@@ -20,10 +20,10 @@ class LinesViewModel constructor(
         fetchLines()
     }
 
-    private fun fetchLines() {
+    internal fun fetchLines() {
         _uiState.value = LinesUiState.Loading
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val routes = linesRepository.getRoutes()
                 if (routes.isEmpty()) {
@@ -50,7 +50,7 @@ class LinesViewModel constructor(
 
     private fun getLineNameFromRouteDescription(shortName: String, longName: String): String {
         var lineName = longName
-        if(longName.contains(shortName)) {
+        if (longName.contains(shortName)) {
             lineName = longName.substringAfter("$shortName-").uppercase()
         }
         return lineName

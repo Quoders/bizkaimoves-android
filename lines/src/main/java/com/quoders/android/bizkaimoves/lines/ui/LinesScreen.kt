@@ -131,10 +131,10 @@ fun LinesScreenPreview() {
     MaterialTheme {
         LinesListContent(
             listOf(
-                Route("1", "A0651", "A0652-LANESTOSA-BALMASEDA", "", 1),
-                Route("2", "A0653", "A0653-TRUCIOS TURTZIOZ-ARTZENTALES", "", 1),
-                Route("3", "A2153", "A2153-BILBAO-TXORIERRI-LARRABETZU", "", 1),
-                Route("4", "A2163", "A2163-ERANDIO-UPV/EHU", "", 1),
+                Route("1", "A0651", "A0652-LANESTOSA-BALMASEDA"),
+                Route("2", "A0653", "A0653-TRUCIOS TURTZIOZ-ARTZENTALES"),
+                Route("3", "A2153", "A2153-BILBAO-TXORIERRI-LARRABETZU"),
+                Route("4", "A2163", "A2163-ERANDIO-UPV/EHU"),
             ),
             onLineClick = {}
         )

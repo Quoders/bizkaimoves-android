@@ -1,35 +1,32 @@
 package com.quoders.android.bizkaimoves.lines
 
+import com.quoders.android.bizkaimoves.lines.data.RouteData
 import com.quoders.android.bizkaimoves.lines.data.RoutesApi
-import com.quoders.android.bizkaimoves.lines.data.RoutesApiData
 
-class LinesRepositoryImpl constructor(
+
+class LinesRepositoryImpl(
     private val routesApi: RoutesApi
 ) : LinesRepository {
     //  TODO: Implement database cache
-    override suspend fun getRoutes(): List<Route> = routesApi.getRoutes().toRouteList()
-}
+    override suspend fun getRoutes() = routesApi.getRoutes().toRouteList()
 
-private fun RoutesApiData.toRouteList(): List<Route> {
-    val routes = mutableListOf<Route>()
-    data.forEach {
-        routes.add(
-            Route(
-                code = it.route_id,
-                shortName = it.route_short_name,
-                longName = it.route_desc,
-                url = it.route_url,
-                order = it.route_sort_order
+    private fun List<RouteData>.toRouteList(): List<Route> {
+        val routes = mutableListOf<Route>()
+        forEach {
+            routes.add(
+                Route(
+                    code = it.route_id.toString(),
+                    shortName = it.route_short_name,
+                    longName = it.route_long_name,
+                )
             )
-        )
+        }
+        return routes
     }
-    return routes
 }
 
 data class Route(
     val code: String,
     val shortName: String,
     val longName: String,
-    val url: String,
-    val order: Int
 )

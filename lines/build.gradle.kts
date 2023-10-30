@@ -56,6 +56,8 @@ dependencies {
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp.logging)
 
+    implementation(libs.mavericks)
+
     testImplementation(libs.junit4)
 
     androidTestImplementation(libs.junit4)
