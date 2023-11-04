@@ -18,14 +18,7 @@ internal fun LineRouteRoute(
     modifier: Modifier = Modifier,
     viewModel: RouteViewModel = koinViewModel(),
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    when (uiState) {
-        RouteUiState.Empty -> EmptyState(modifier)
-        is RouteUiState.Error -> ErrorState(modifier)
-        RouteUiState.Loading -> LoadingState(modifier)
-        is RouteUiState.Success -> RouteScreen()
-    }
 }
 
 @Composable

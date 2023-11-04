@@ -8,7 +8,7 @@ import androidx.navigation.navigation
 import com.quoders.android.bizkaimoves.lines.ui.LinesListRoute
 
 private const val linesGraphRoutePattern = "lines_graph"
-const val linesRoute = "lines_route"
+const val linesNavigationRoute = "lines_route"
 
 fun NavController.navigateToLinesGraph(navOptions: NavOptions? = null) {
     this.navigate(linesGraphRoutePattern, navOptions)
@@ -20,9 +20,9 @@ fun NavGraphBuilder.linesGraph(
 ) {
     navigation(
         route = linesGraphRoutePattern,
-        startDestination = linesRoute,
+        startDestination = linesNavigationRoute,
     ) {
-        composable(route = linesRoute) {
+        composable(route = linesNavigationRoute) {
             LinesListRoute(onLineClick = onLineClick)
         }
         nestedGraphs()

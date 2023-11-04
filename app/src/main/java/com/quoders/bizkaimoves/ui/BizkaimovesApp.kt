@@ -1,11 +1,9 @@
 package com.quoders.bizkaimoves.ui
 
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -23,10 +21,6 @@ import com.quoders.bizkaimoves.navigation.BizkaimovesNavigationBarItem
 import com.quoders.bizkaimoves.navigation.TopLevelDestination
 import com.quoders.bizkaimoves.ui.theme.BizkaimovesTheme
 
-@OptIn(
-    ExperimentalMaterial3Api::class,
-    ExperimentalLayoutApi::class,
-)
 @Composable
 fun BizkaimovesApp(
     modifier: Modifier = Modifier,

@@ -14,7 +14,7 @@ import com.quoders.android.bizkaimoves.aroundme.navigation.aroundMeNavigationRou
 import com.quoders.android.bizkaimoves.aroundme.navigation.navigateToAroundMe
 import com.quoders.android.bizkaimoves.favorites.navigation.favoritesNavigationRoute
 import com.quoders.android.bizkaimoves.favorites.navigation.navigateToFavorites
-import com.quoders.android.bizkaimoves.lines.navigation.linesRoute
+import com.quoders.android.bizkaimoves.lines.navigation.linesNavigationRoute
 import com.quoders.android.bizkaimoves.lines.navigation.navigateToLinesGraph
 import com.quoders.bizkaimoves.navigation.TopLevelDestination
 import kotlinx.coroutines.CoroutineScope
@@ -49,7 +49,7 @@ class BizkaimovesAppState(
     val currentTopLevelDestination: TopLevelDestination?
         @Composable get() = when (currentDestination?.route) {
             aroundMeNavigationRoute -> TopLevelDestination.AROUND_ME
-            linesRoute -> TopLevelDestination.LINES
+            linesNavigationRoute -> TopLevelDestination.LINES
             favoritesNavigationRoute -> TopLevelDestination.FAVORITES
             else -> null
         }

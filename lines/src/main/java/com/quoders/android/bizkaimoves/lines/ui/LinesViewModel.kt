@@ -1,66 +1,46 @@
 package com.quoders.android.bizkaimoves.lines.ui
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.airbnb.mvrx.Async
+import com.airbnb.mvrx.MavericksState
+import com.airbnb.mvrx.MavericksViewModel
+import com.airbnb.mvrx.MavericksViewModelFactory
+import com.airbnb.mvrx.Uninitialized
+import com.airbnb.mvrx.ViewModelContext
+import com.quoders.android.bizkaimoves.lines.LinesRepository
 import com.quoders.android.bizkaimoves.lines.LinesRepositoryImpl
-import com.quoders.android.bizkaimoves.lines.Route
+import com.quoders.android.bizkaimoves.lines.Line
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 class LinesViewModel(
-    private val linesRepository: LinesRepositoryImpl
-) : ViewModel() {
-
-    private val _uiState = MutableStateFlow<LinesUiState>(LinesUiState.Empty)
-    val uiState: StateFlow<LinesUiState> = _uiState
-
+    initialState: LinesState,
+    private val repository: LinesRepository
+) : MavericksViewModel<LinesState>(
+    initialState
+) {
     init {
         fetchLines()
     }
 
-    internal fun fetchLines() {
-        _uiState.value = LinesUiState.Loading
-
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val routes = linesRepository.getRoutes()
-                if (routes.isEmpty()) {
-                    _uiState.value = LinesUiState.Empty
-                } else {
-                    val lines = getRoutesWithFormattedName(routes)
-                    _uiState.value = LinesUiState.Success(lines)
-                }
-            } catch (ex: Exception) {
-                _uiState.value = LinesUiState.Error(ex)
-            }
+    private fun fetchLines() {
+        suspend {
+            repository.getLines()
+        }.execute(Dispatchers.IO) {
+            copy(lines = it)
         }
     }
 
-    private fun getRoutesWithFormattedName(routes: List<Route>): List<Route> {
-        val lines = mutableListOf<Route>()
-        routes.forEach {
-            lines.add(
-                it.copy(longName = getLineNameFromRouteDescription(it.shortName, it.longName))
-            )
+    companion object : MavericksViewModelFactory<LinesViewModel, LinesState> {
+        override fun create(
+            viewModelContext: ViewModelContext,
+            state: LinesState
+        ): LinesViewModel {
+            val repo: LinesRepositoryImpl by viewModelContext.activity.inject()
+            return LinesViewModel(state, repo)
         }
-        return lines
-    }
-
-    private fun getLineNameFromRouteDescription(shortName: String, longName: String): String {
-        var lineName = longName
-        if (longName.contains(shortName)) {
-            lineName = longName.substringAfter("$shortName-").uppercase()
-        }
-        return lineName
     }
 }
 
-
-sealed interface LinesUiState {
-    object Empty : LinesUiState
-    object Loading : LinesUiState
-    data class Success(val lines: List<Route>) : LinesUiState
-    data class Error(val exception: Throwable) : LinesUiState
-}
+data class LinesState(
+    val lines: Async<List<Line>> = Uninitialized
+) : MavericksState

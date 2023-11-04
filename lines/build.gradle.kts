@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.okhttp.logging)
 
     implementation(libs.mavericks)
+    implementation(libs.mavericks.compose)
 
     testImplementation(libs.junit4)
 
